@@ -6,8 +6,8 @@
 #       work with a codec-class to simplify parameters
 
 import misc.help 
-import ffmpeg.ffprobe
-import ffmpeg.ffmpeg
+import ffmpeg.ffprobe as ffprobe
+import ffmpeg.ffmpeg  as ffmpeg
 import misc.os
 
 # @func transcode
