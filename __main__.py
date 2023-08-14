@@ -6,6 +6,7 @@
 # imports
 import os
 import sys
+import time
 
 import ffprogress
 import ffmpeg
@@ -44,14 +45,11 @@ def convert(input_path, output_path, qv) :
     pbar = ffprogress.ProgressBar(40)
     # launch ffmpeg
     ff = ffmpeg.run(input_path, output_path, options)
-    while ff.isrunning :
-        try :
-            pbar.progress(*ff.outputs)
-            time.sleep(0.01)
-        except KeyboardInterrupt : 
-            raise
-        except :
-            pass
+    while ff.isrunning() :
+        #print(ff.outputs[0].readline().decode('utf-8').strip())
+        pbar.progress(*ff.outputs)
+        time.sleep(0.1)
+    pbar.end()
     ff.kill()
     print(f"\nConversion complete for {input_path}")
     try :
@@ -101,7 +99,7 @@ def main() :
             # if isH265(input_path) :           
             #     print(f"Copying {input_file} (already in x265 format)")
             #     shutil.copy(input_path, output_path)
-            print ("converting ....")
+            print ("converting ...")
             convert(input_path, output_path, qv_start)
 
     except KeyboardInterrupt : 

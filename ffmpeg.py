@@ -21,36 +21,42 @@ class run :
     process = None
 
     # convert option dict to list for ffmpeg
-    @classmethod
-    def option2list(options : dict) :
+    @staticmethod
+    def options2list(options : dict) :
         return [val for pair in options.items() for val in pair]
+
+    @staticmethod
+    def options2str(options : dict) :
+        return ' '.join(run.options2list(options))
 
     # will run ffmpeg with otions
     def __init__(self, in_path, out_path, options) :
-        cmd = _ffmpeg_cmd.format(input=_san_path(in_path), options = options, output=_san_path(out_path))
+        cmd = _ffmpeg_cmd.format(input=_san_path(in_path), options = run.options2str(options), output=_san_path(out_path))
+        print (f"running ffmpeg with :{cmd}\n")
         self.process = sbp.Popen( sp(cmd), stdout = sbp.PIPE, stderr = sbp.PIPE )
 
-    @property
     def isrunning(self) :
-        return self.process.poll() != None
+        try :
+            return self.process.poll() == None
+        except :
+            return True
+
+
 
     @property
     def outputs(self) :
         try :
-            return (self.process.stdout , self.process.stderr)
+            return self.process.stdout , self.process.stderr
         except :
             return None, None
 
     def kill(self) :
         try :
-            self.process.kill()
-            stdout, stderr = self.process.communicate()
-            print(stderr)
+            if self.isrunning() :
+                print ("process killed")
+                self.process.kill()
         except :
-            pass
+            raise
 
     def __del__(self) :
-        try :
-            self.kill()
-        except: 
-            pass
+        self.kill()

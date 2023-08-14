@@ -17,24 +17,45 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1672844754,
-        "narHash": "sha256-o26WabuHABQsaHxxmIrR3AQRqDFUEdLckLXkVCpIjSU=",
+        "lastModified": 1692047618,
+        "narHash": "sha256-JJL04pf8++56wi16S24BNHZvYP9/orqD4uCDBjWH9BY=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e9ade2c8240e00a4784fac282a502efff2786bdc",
+        "rev": "6e359351ed9221f4ae0c3b1d7849008c7234cead",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-22.11",
+        "ref": "release-23.05",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pycnix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1691000849,
+        "narHash": "sha256-bOSTJON+YsK3Bk5SVVkVHepOzrTV/sD8ZEFsghnGWoI=",
+        "owner": "MadMcCrow",
+        "repo": "pycnix",
+        "rev": "1b0ac9e7d758e3c30e5b46f043cbcdb6d13f72f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MadMcCrow",
+        "repo": "pycnix",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pycnix": "pycnix"
       }
     }
   },
