@@ -23,7 +23,8 @@ compress_options =  {
     "-tag:v" : "hvc1",
     "-c:a" : "aac",
     "-b:a" : "128k",
-    "--frame-dup" : "", # just add frame duplication detection
+    "-g"   : "1",
+    "-x265-params" : "frame-dup=1:intra-refresh=1:dynamic-refine=1:refine-intra=4:refine-inter=3",
 }
 
 def remove(path) :
@@ -83,7 +84,7 @@ def main() :
         os.makedirs(output_folder, exist_ok=True)
 
         # get all videos in folder
-        video_files = [x for x in os.listdir(input_folder) if any(x.endswith(ext) for ext in video_extensions)]
+        video_files = [x for x in os.listdir(input_folder) if any(x.endswith(ext) and not x.startswith('.') for ext in video_extensions)]
 
         # sort by size : starting with smaller ones 
         video_files.sort(key=lambda x: os.path.getsize(os.path.join(input_folder, x)))
