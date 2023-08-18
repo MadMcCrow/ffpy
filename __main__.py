@@ -18,11 +18,12 @@ compressionRatio = 0.75
 
 # default options for ffmpeg
 compress_options =  {
-    "-preset" : "slow",
-    "-c:v" : "hevc_videotoolbox",
+    "-preset" : "slower",
+    "-c:v" : "libx265",
     "-tag:v" : "hvc1",
     "-c:a" : "aac",
     "-b:a" : "128k",
+    "--frame-dup" : "", # just add frame duplication detection
 }
 
 def remove(path) :
