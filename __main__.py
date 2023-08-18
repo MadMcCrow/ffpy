@@ -46,13 +46,14 @@ def convert(input_path, output_path, qv) :
     # create progressbar :
     pbar = ffprogress.ProgressBar(40)
     # launch ffmpeg
-    ff = ffmpeg.run(input_path, output_path, options)
-    while ff.isrunning() :
-        #print(ff.outputs[0].readline().decode('utf-8').strip())
-        pbar.progress(*ff.outputs)
-        time.sleep(0.1)
-    pbar.end()
-    ff.kill()
+    ff = ffmpeg.run(input_path, output_path, options, False)
+    # work directly, avoid suprocess
+    # while ff.isrunning() :
+    #     #print(ff.outputs[0].readline().decode('utf-8').strip())
+    #     pbar.progress(*ff.outputs)
+    #     time.sleep(0.1)
+    # pbar.end()
+    # ff.kill()
     print(f"\nConversion complete for {input_path}")
     try :
         input_size = os.path.getsize(input_path)
